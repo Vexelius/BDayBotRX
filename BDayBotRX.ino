@@ -65,6 +65,11 @@ void loop()
     Serial.print(F("Key Pressed: "));
     Serial.println(myData.keyPress);
 
+    if(myData.keyPress == 'M')
+    {
+      Serial.println(F("Playing Melody!!!"));
+    }
+
 
   } // END radio available
 
