@@ -18,7 +18,7 @@ byte addresses[][6] = {"1Node","2Node"};
 struct dataStruct {
   unsigned long timeCounter;  // Save response times
   char keyPress;
-  bool btnMelody;          // M Button
+  bool keypadLock;          // M Button
 } myData;                 // Data stream that will be sent to the robot
 
 
