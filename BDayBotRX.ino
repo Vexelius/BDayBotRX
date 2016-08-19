@@ -17,8 +17,10 @@ byte addresses[][6] = {"1Node","2Node"};
 
 struct dataStruct {
   unsigned long timeCounter;  // Save response times
-  char keyPress;
-  bool keypadLock;          // M Button
+  char keyPress;          // When a key is pressed, this variable stores its unique code
+  boolean keypadLock;     // When this flag is active, no input will be received fron the keypad
+  boolean configMode;     // This flag determines wheter the robot is in Config Mode or not
+  boolean statusDizzy;
 } myData;                 // Data stream that will be sent to the robot
 
 
@@ -62,12 +64,31 @@ void loop()
     radio.write( &myData, sizeof(myData) );              // Send the received data back.
     radio.startListening();                              // Now, resume listening so we catch the next packets.
 
-    Serial.print(F("Key Pressed: "));
+    Serial.print("Key Pressed: ");
     Serial.println(myData.keyPress);
 
     if(myData.keyPress == 'M')
     {
-      Serial.println(F("Playing Melody!!!"));
+      Serial.println("Playing Melody!!!");
+    }
+
+    if(myData.configMode == true)
+    {
+      Serial.println("ConfigMode : Enabled");
+    }
+
+    if(myData.statusDizzy == true)
+    {
+      if(myData.keyPress == 'L')
+      Serial.println("I'm Dizzy!!! (@_@ l)");
+      if(myData.keyPress == 'R')
+      Serial.println("I'm Dizzy!!! (r @_@)");
+    }
+
+
+    if(myData.statusDizzy == false)
+    {
+      Serial.println("I'm OK...");
     }
 
 
